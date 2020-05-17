@@ -1,0 +1,31 @@
+# include sensitive user information in a separate, unversioned file
+[include]
+    path = ~/.gitconfig.local
+
+[user]
+    name = Jeremy Kun
+    email = j2kun@users.noreply.github.com
+
+[core]
+    editor = vim
+
+[github]
+    user = j2kun
+
+[push]
+    default = simple
+
+[alias]
+    change-commits = "!f() { VAR=$1; OLD=$2; NEW=$3; shift 3; git filter-branch --env-filter \"if [[ \\\"$`echo $VAR`\\\" = '$OLD' ]]; then export $VAR='$NEW'; fi\" $@; }; f "
+    fresh = !git checkout master && git pull
+    go = "!sh -c \"vim $(git grep --name-only $1 | head -n 1)\" -"
+    it = !git init && git commit -m "root" --allow-empty
+    l = !git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit | head -n 6
+    please = push --force-with-lease
+    recent = for-each-ref --sort=-committerdate refs/heads/
+    remaster = !git checkout master && git pull && git checkout - && git rebase master
+    rmm = !git checkout master && git pull && git checkout - && GIT_SEQUENCE_EDITOR=/usr/local/bin/git-rebase-drop-migrations.sh git rebase -i master && python manage.py makemigrations
+    s = status --short --branch
+
+[credential]
+    helper = osxkeychain

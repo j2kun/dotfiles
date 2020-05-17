@@ -1,0 +1,80 @@
+global !p
+def make_auto_value(class_name, args):
+  template = '''abstract class %s {
+
+%s
+
+  /** Static factory method for {@link Builder}. */
+  public static Builder builder() {
+    return new AutoValue_%s.Builder();
+  }
+
+  /** Builder for {@link %s}. */
+  @AutoValue.Builder
+  public abstract static class Builder {
+    public abstract %s build();
+
+%s
+  }
+}'''
+  args = args.split()
+  type_variable_pairs = [
+    (args[i], args[i + 1]) for i in range(0, len(args) - 1, 2)
+  ]
+
+  variables = []
+  builder_methods = []
+  for type_name, variable_name in type_variable_pairs:
+    camel_case = variable_name[0].lower() + variable_name[1:]
+    cap_case = variable_name[0].upper() + variable_name[1:]
+    variables.append("  public abstract {} {}();".format(type_name, camel_case))
+    builder_methods.append(
+      "    public abstract Builder set{}({} {});".format(cap_case, type_name, camel_case))
+
+  return template % (
+    class_name,
+    '\n\n'.join(variables),
+    class_name,
+    class_name,
+    class_name,
+    '\n\n'.join(builder_methods),
+  )
+endglobal
+
+
+snippet "^autovalue (\w+) (.+)" "insert AutoValue <class_name> [type name]..." r
+import com.google.auto.value.AutoValue;
+
+/** ${1:TODO: add javadoc} */
+@AutoValue
+${2:public} `!p snip.rv = make_auto_value(match.group(1), match.group(2))`
+endsnippet
+
+
+snippet /** "Javadoc comment" b
+/**
+ * $1
+ */
+endsnippet
+
+
+snippet const "Add a constant" b
+private static final ${1:String} ${2:var} = ${3};
+endsnippet
+
+
+snippet try "try/catch block" b
+try {
+	$3
+} catch(${1:Exception} ${2:e}) {
+	$4
+}
+endsnippet
+
+
+snippet "\.str?e?a?m?" "start a stream" r
+
+	.stream()
+	.${1:map}($2)
+	.collect(${3:toImmutable${4:List}}($5))${6:;}
+endsnippet

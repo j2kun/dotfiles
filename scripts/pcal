@@ -1,0 +1,2 @@
+#!/bin/sh
+exec java -cp /Applications/TLA+\ Toolbox.app/Contents/Eclipse/tla2tools.jar pcal.trans "$@"
