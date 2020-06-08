@@ -12,6 +12,9 @@
 [github]
     user = j2kun
 
+[init]
+    templateDir = ~/.config/git/template/
+
 [push]
     default = simple
 
