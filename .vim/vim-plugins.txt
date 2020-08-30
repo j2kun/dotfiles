@@ -8,6 +8,7 @@ google/vim-codefmt
 google/vim-glaive
 google/vim-maktaba
 honza/vim-snippets
+knubie/vim-kitty-navigator
 lervag/vimtex
 mechatroner/rainbow_csv
 nvie/vim-flake8
