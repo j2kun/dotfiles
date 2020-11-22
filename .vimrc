@@ -49,6 +49,14 @@ augroup numbertoggle
   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 augroup END
 
+" Autocomplete popup menu settings
+set completeopt=menu,menuone,preview
+autocmd CompleteDone * silent! pclose
+inoremap <expr> <TAB> pumvisible() ? "\<C-y>" : "\<TAB>"
+inoremap <expr> <Esc> pumvisible() ? "\<C-e>" : "\<Esc>"
+inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<Down>"
+inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<Up>"
+
 """" Movement, selection, search, and formatting """"
 
 " move vertically by visual line
@@ -61,14 +69,6 @@ nnoremap gV `[v`]
 " align text in current paragraph
 nnoremap <leader>gq vipgq
 
-" reformat the entire buffer
-" nnoremap <leader>=b mfgggqG`f
-nnoremap <leader>=b :FormatCode<CR>
-
-
-" Select next quickfix line
-nnoremap <leader>n <C-W><C-J><CR>
-
 if executable('ag')
   " Use ag over grep
   set grepprg=ag\ --nogroup\ --nocolor
@@ -76,9 +76,6 @@ endif
 
 " Sort and dedupe current paragraph by line
 nnoremap <leader>s vip:sort u<CR>
-
-" Go to the end of the import list
-nnoremap <leader>i G?import<CR>
 
 """" Files and buffers """"
 
@@ -97,16 +94,6 @@ set undodir=/tmp/
 
 " use system clipboard
 set clipboard=unnamed
-
-" clean up whitespace
-fun! StripTrailingWhitespace()
-    " Only strip if the b:noStripWhitespace variable isn't set
-    if exists('b:noStripWhitespace')
-        return
-    endif
-    %s/\s\+$//e
-endfun
-autocmd BufWritePre * call StripTrailingWhitespace()
 
 " Ensure latex uses ftplugin/tex.vim for all .tex files
 let g:tex_flavor = 'latex'
@@ -129,22 +116,10 @@ nmap <Leader>hr <Plug>(GitGutterUndoHunk)
 nmap <Leader>gb :Gbrowse<CR>
 vmap <Leader>gb :Gbrowse<CR>
 let g:gitgutter_realtime = 1
+let g:gitgutter_max_signs = 1000
 
 " Gundo
 nnoremap <leader>u :GundoToggle<CR>
-
-" Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_python_checkers = ['pycodestyle']
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_javascript_eslint_exec = 'eslint_d'
-let g:syntastic_mode_map = { 'passive_filetypes': ['tex'] }
 
 " vim-session
 let g:session_default_overwrite = 1
@@ -160,9 +135,36 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips', '~/.vim/bundle/vim-snippets/UltiSnips']
 
-" you complete me
-" prevent autocomplete verbose statusline info
-set shortmess+=c
+
+" ale for Language Server
+" Installing dependencies
+"   yapf: pip3 install yapf
+"   reorder-python-imports: pip3 install reorder-python-imports
+"   flake8: pip3 install flake8
+"   pyls: pip3 install 'python-language-server[all]' pyls-mypy
+let g:ale_fixers = {
+\   'python': ['yapf', 'reorder-python-imports'],
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\}
+let g:ale_linters = {
+\   'python': ['pyls', 'flake8']
+\}
+let g:ale_fix_on_save = 1
+nmap <silent> [e <Plug>(ale_previous_wrap)
+nmap <silent> ]e <Plug>(ale_next_wrap)
+nmap <silent> <leader>=b <Plug>(ale_fix)
+nmap <silent> <leader>kd <Plug>(ale_go_to_definition)
+nmap <silent> <leader>kr <Plug>(ale_find_references)
+nmap <silent> <leader>kh <Plug>(ale_hover)
+nmap <silent> <leader>r :ALERename<CR>
+
+if executable('pyls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'pyls',
+        \ 'cmd': {server_info->['pyls']},
+        \ 'whitelist': ['python'],
+        \ })
+endif
 
 """" Local config """"
 
