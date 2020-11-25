@@ -121,6 +121,9 @@ let g:gitgutter_max_signs = 1000
 " Gundo
 nnoremap <leader>u :GundoToggle<CR>
 
+" vim-codefmt
+nnoremap <leader>=b :FormatCode<CR>
+
 " vim-session
 let g:session_default_overwrite = 1
 let g:session_autoload = 'yes'
@@ -134,29 +137,6 @@ let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips', '~/.vim/bundle/vim-snippets/UltiSnips']
-
-
-" ale for Language Server
-" Installing dependencies
-"   yapf: pip3 install yapf
-"   reorder-python-imports: pip3 install reorder-python-imports
-"   flake8: pip3 install flake8
-"   pyls: pip3 install 'python-language-server[all]' pyls-mypy
-let g:ale_fixers = {
-\   'python': ['yapf', 'reorder-python-imports'],
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\}
-let g:ale_linters = {
-\   'python': ['pyls', 'flake8']
-\}
-let g:ale_fix_on_save = 1
-nmap <silent> [e <Plug>(ale_previous_wrap)
-nmap <silent> ]e <Plug>(ale_next_wrap)
-nmap <silent> <leader>=b <Plug>(ale_fix)
-nmap <silent> <leader>kd <Plug>(ale_go_to_definition)
-nmap <silent> <leader>kr <Plug>(ale_find_references)
-nmap <silent> <leader>kh <Plug>(ale_hover)
-nmap <silent> <leader>r :ALERename<CR>
 
 if executable('pyls')
     au User lsp_setup call lsp#register_server({
