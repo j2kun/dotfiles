@@ -25,6 +25,9 @@ inoremap jk <ESC>
 " remove annoying defaults
 nnoremap Q <SPACE>
 
+" toggle fold
+nnoremap <SPACE> za
+
 " Default spacing
 set tabstop=4           " number of visual spaces per TAB
 set shiftwidth=4        " number of visual spaces per shift
