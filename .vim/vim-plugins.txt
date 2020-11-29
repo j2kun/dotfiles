@@ -1,3 +1,4 @@
+Konfekt/FastFold
 SirVer/ultisnips
 airblade/vim-gitgutter
 altercation/vim-colors-solarized
@@ -12,9 +13,11 @@ lervag/vimtex
 machakann/vim-swap
 mechatroner/rainbow_csv
 scrooloose/nerdtree
+tmhedberg/SimpylFold
 tpope/vim-abolish
 tpope/vim-sensible
 tpope/vim-surround
 wellle/targets.vim
 xolox/vim-misc
 xolox/vim-session
+zhimsel/vim-stay

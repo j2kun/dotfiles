@@ -5,6 +5,7 @@
 """" General settings """"
 
 set nocompatible
+set encoding=utf-8
 execute pathogen#infect()
 syntax enable
 set background=dark
@@ -49,14 +50,6 @@ augroup numbertoggle
   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 augroup END
 
-" Autocomplete popup menu settings
-set completeopt=menu,menuone,preview
-autocmd CompleteDone * silent! pclose
-inoremap <expr> <TAB> pumvisible() ? "\<C-y>" : "\<TAB>"
-inoremap <expr> <Esc> pumvisible() ? "\<C-e>" : "\<Esc>"
-inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<Down>"
-inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<Up>"
-
 """" Movement, selection, search, and formatting """"
 
 " move vertically by visual line
@@ -76,6 +69,14 @@ endif
 
 " Sort and dedupe current paragraph by line
 nnoremap <leader>s vip:sort u<CR>
+
+" recommended by vim-stay
+set viewoptions=cursor,folds,slash,unix
+
+" Make it so that navigation with { and }
+" does not open folds.
+set foldopen-=block
+
 
 """" Files and buffers """"
 
@@ -137,14 +138,6 @@ let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips', '~/.vim/bundle/vim-snippets/UltiSnips']
-
-if executable('pyls')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'pyls',
-        \ 'cmd': {server_info->['pyls']},
-        \ 'whitelist': ['python'],
-        \ })
-endif
 
 """" Local config """"
 
