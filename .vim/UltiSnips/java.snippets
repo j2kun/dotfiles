@@ -51,6 +51,76 @@ ${2:public} `!p snip.rv = make_auto_value(match.group(1), match.group(2))`
 endsnippet
 
 
+global !p
+def make_auto_value_factory(class_name, args):
+  template = '''abstract class %s {
+
+  /** Static factory method for {@link Factory.Builder}. */
+  public static Factory.Builder builder() {
+    return new AutoValue_%s_Factory.Builder();
+  }
+
+  /** Factory for {@link %s} */
+  @AutoValue
+  public abstract static class Factory {
+
+%s
+
+    private %s build() {
+
+      return new AutoValue_%s();
+    }
+
+    /** Builder for {@link Factory}. */
+    @AutoValue.Builder
+    public abstract static class Builder {
+      public abstract Factory autoBuild();
+
+%s
+
+      public final %s build() {
+        return autoBuild().build();
+      }
+    }
+  }
+}'''
+  args = args.split()
+  type_variable_pairs = [
+    (args[i], args[i + 1]) for i in range(0, len(args) - 1, 2)
+  ]
+
+  variables = []
+  builder_methods = []
+  for type_name, variable_name in type_variable_pairs:
+    camel_case = variable_name[0].lower() + variable_name[1:]
+    cap_case = variable_name[0].upper() + variable_name[1:]
+    variables.append("    public abstract {} {}();".format(type_name, camel_case))
+    builder_methods.append(
+      "      public abstract Builder set{}({} {});".format(cap_case, type_name, camel_case))
+
+  return template % (
+    class_name,
+    class_name,
+    class_name,
+    '\n\n'.join(variables),
+    class_name,
+    class_name,
+    '\n\n'.join(builder_methods),
+    class_name,
+  )
+endglobal
+
+
+snippet "^autovaluefactory (\w+) (.+)" "insert AutoValue with Factory <class_name> [type name]..." r
+import com.google.auto.value.AutoValue;
+
+/** ${1:TODO: add javadoc} */
+@AutoValue
+${2:public} `!p snip.rv = make_auto_value_factory(match.group(1), match.group(2))`
+endsnippet
+
+
+
 snippet /** "Javadoc comment" b
 /**
  * $1
