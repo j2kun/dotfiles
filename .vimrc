@@ -38,10 +38,24 @@ set expandtab           " tabs are spaces
 set showcmd             " show command in bottom bar
 set cursorline          " highlight current line
 set wildmenu            " visual autocomplete for command menu
+set wildmode=longest:full,full
 set lazyredraw          " redraw only when we need to.
 set showmatch           " highlight matching brackets
 set incsearch           " search as characters are entered
 set updatetime=250
+
+" Autocomplete menu
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<Down>"
+inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<Up>"
+inoremap <expr> <CR> pumvisible() ? "\<CR>\<CR>" : "\<CR>"
+inoremap <expr> <C-d> pumvisible() ? DebugCompleteMenu() ? "\<C-d>"
+set completeopt=menuone,noinsert,noselect
+
+function DebugCompleteMenu()
+  echom complete_info()
+endfunction
 
 " relative and absolute numbers
 set number relativenumber
