@@ -94,6 +94,8 @@ set viewoptions=cursor,folds,slash,unix
 " does not open folds.
 set foldopen-=block
 
+" ,m list marks
+nnoremap <silent> <leader>m :marks ABCDEFGHIJKLMNOPQRSTUVWZYZ<CR>:normal! `
 
 """" Files and buffers """"
 
