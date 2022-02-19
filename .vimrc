@@ -18,6 +18,9 @@ set autochdir
 " Allow project-specific vimrc files
 set exrc
 
+" Look for tags in current directory, and walk up to root to find more
+set tags=./tags;/
+
 " Global config
 let mapleader=","
 inoremap jk <ESC>
@@ -29,9 +32,9 @@ nnoremap Q <SPACE>
 nnoremap <SPACE> za
 
 " Default spacing
-set tabstop=4           " number of visual spaces per TAB
-set shiftwidth=4        " number of visual spaces per shift
-set softtabstop=4       " number of spaces in tab when editing
+set tabstop=2           " number of visual spaces per TAB
+set shiftwidth=2        " number of visual spaces per shift
+set softtabstop=2       " number of spaces in tab when editing
 set expandtab           " tabs are spaces
 
 " Misc UI Config
