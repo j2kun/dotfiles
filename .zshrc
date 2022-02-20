@@ -7,7 +7,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 ZSH_THEME="agnoster"
-DEFAULT_USER="jeremy"
+DEFAULT_USER=$(whoami)
 
 # Uncomment the following line to use hyphen-insensitive completion. Case
 # sensitive completion must be off. _ and - will be interchangeable.
@@ -21,15 +21,13 @@ COMPLETION_WAITING_DOTS="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(fasd)
 
-# User configuration
-
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/bin:."
 source $ZSH/oh-my-zsh.sh
 
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+alias vim='nvim'
+alias ls='exa'
+export LS_COLORS="di=34:ln=35"
 
-alias lc='clear; ls'
 alias gti='git'
 
 eval "$(fasd --init auto)"
@@ -42,6 +40,7 @@ export PATH="$PATH:/Library/TeX/Distributions/.DefaultTeX/Contents/Programs/texb
 
 # git aliases
 alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+
 
 if [ -f ".zshrc.local" ]; then
    source .zshrc.local
