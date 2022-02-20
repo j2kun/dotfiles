@@ -21,7 +21,7 @@ COMPLETION_WAITING_DOTS="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(fasd)
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/bin:."
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/bin:$HOME/.local/bin:."
 source $ZSH/oh-my-zsh.sh
 
 alias vim='nvim'
@@ -35,8 +35,6 @@ alias j='fasd_cd -d'
 alias v='f -e vim' # quick opening files with vim
 
 # alias latexmk='latexmk.pl -pvc -pdf -e "$pdflatex=q/xelatex %O -interaction=nonstopmode %S/"'
-export PATH="/Library/TeX/texbin:$PATH"
-export PATH="$PATH:/Library/TeX/Distributions/.DefaultTeX/Contents/Programs/texbin"
 
 # git aliases
 alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
@@ -45,7 +43,6 @@ alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset
 if [ -f ".zshrc.local" ]; then
    source .zshrc.local
 fi
-
 
 # to print ZSH's startup profiling info, uncomment this line and the line at the top
 # zprof
