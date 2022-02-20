@@ -34,7 +34,7 @@ eval "$(fasd --init auto)"
 alias j='fasd_cd -d'
 alias v='f -e vim' # quick opening files with vim
 
-# alias latexmk='latexmk.pl -pvc -pdf -e "$pdflatex=q/xelatex %O -interaction=nonstopmode %S/"'
+alias latexmk='latexmk -pvc -pdf -xelatex -interaction=nonstopmode'
 
 # git aliases
 alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
