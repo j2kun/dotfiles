@@ -34,8 +34,6 @@
     rmm = !git checkout main && git pull && git checkout - && GIT_SEQUENCE_EDITOR=/usr/local/bin/git-rebase-drop-migrations.sh git rebase -i main && python manage.py makemigrations
     s = status --short --branch
 
-[credential]
-    helper = osxkeychain
 [filter "lfs"]
     clean = git-lfs clean -- %f
     smudge = git-lfs smudge -- %f
