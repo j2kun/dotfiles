@@ -3,7 +3,6 @@ let g:python3_host_prog=$HOME."/.config/nvim/venv/bin/python3"
 
 call plug#begin(stdpath('data') . '/plugged')
 
-Plug 'SirVer/ultisnips' 
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'christoomey/vim-tmux-navigator'
@@ -13,7 +12,6 @@ Plug 'lervag/vimtex'
 " gs to start function arg swap mode
 Plug 'machakann/vim-swap'
 Plug 'mechatroner/rainbow_csv'
-Plug 'neovim/nvim-lspconfig'
 Plug 'overcache/NeoSolarized'
 Plug 'preservim/nerdtree'
 Plug 'simrat39/rust-tools.nvim'
@@ -24,16 +22,22 @@ Plug 'wellle/targets.vim'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
 
+Plug 'neovim/nvim-lspconfig'
+
 "  autocompletion, with spearate plugins for each source
-Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-calc'
+Plug 'kdheepak/cmp-latex-symbols'
 Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
+Plug 'rafamadriz/friendly-snippets'
+
 " vsnip snippets for lots of languages
 Plug 'rafamadriz/friendly-snippets'
-Plug 'hrsh7th/nvim-cmp'
 
 " Fuzzy finder
 Plug 'nvim-lua/plenary.nvim'
@@ -73,7 +77,7 @@ set expandtab           " tabs are spaces
 colorscheme NeoSolarized
 set background=dark
 set cursorline          " highlight current line
-set termguicolors       " terminal colors
+set notermguicolors     " disable terminal GUI colors
 set nohlsearch          " don't highlight searches after done
 " use system clipboard
 set clipboard=unnamed
@@ -125,6 +129,7 @@ let g:tex_flavor = 'latex'
 " telescope/fuzzy finder
 nnoremap <c-p> <cmd>Telescope find_files<cr>
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fs <cmd>Telescope grep_string<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
@@ -145,17 +150,29 @@ highlight clear SignColumn
 let g:gitgutter_realtime = 1
 let g:gitgutter_max_signs = 1000
 
-" ultisnips
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-let g:UltiSnipsEditSplit="vertical"
-let g:UltiSnipsSnippetDirectories = [stdpath('data') . '/plugged' . '/vim-snippets/UltiSnips']
-
+" Snippets
+" Expand
+imap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
+smap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
+" Expand or jump
+imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+" Jump forward or backward
+imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+" Select or cut text to use as $TM_SELECTED_TEXT in the next snippet.
+" See https://github.com/hrsh7th/vim-vsnip/pull/50
+nmap        s   <Plug>(vsnip-select-text)
+xmap        s   <Plug>(vsnip-select-text)
+nmap        S   <Plug>(vsnip-cut-text)
+xmap        S   <Plug>(vsnip-cut-text)
 
 " vim-rooter
 " for files not in a project, chroot to the directory containing the file
 let g:rooter_change_directory_for_non_project_files = 'current'
+let g:rooter_targets = '*.py,*.java,*.proto,BUILD'
 
 " NERDtree
 nnoremap <leader>t :NERDTreeToggle %<CR>
@@ -171,3 +188,7 @@ autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
 nnoremap <leader>U viwU
 " make word lower case
 nnoremap <leader>u viwu
+
+if filereadable(glob("~/.vimrc.local"))
+    source ~/.vimrc.local
+endif
