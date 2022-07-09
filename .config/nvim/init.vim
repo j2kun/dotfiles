@@ -1,3 +1,6 @@
+" required to allow nvim to work with python3 inside a virtualenv
+let g:python3_host_prog="/home/j2kun/.config/nvim/venv/bin/python3"
+
 call plug#begin(stdpath('data') . '/plugged')
 
 Plug 'SirVer/ultisnips' 
@@ -26,14 +29,19 @@ Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
+" vsnip snippets for lots of languages
+Plug 'rafamadriz/friendly-snippets'
 Plug 'hrsh7th/nvim-cmp'
-Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 
 " Fuzzy finder
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-treesitter/nvim-treesitter'
+" Allows Telescope to use neovim builtins, like `vim.lsp.buf.code_action()`
+Plug 'nvim-telescope/telescope-ui-select.nvim'
 
 call plug#end()
 
@@ -123,7 +131,6 @@ nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>fr <cmd>Telescope registers<cr>
 nnoremap <leader>fj <cmd>Telescope jump_list<cr>
 nnoremap <leader>fo <cmd>Telescope oldfiles<cr>
-nnoremap <leader>fd <cmd>Telescope lsp_diagnostics<cr>
 " to explore picker options, list them all in the fuzzy finder window
 nnoremap <leader>fl <cmd>Telescope builtin<cr>
 nnoremap <leader>m <cmd>Telescope marks<cr>
@@ -143,7 +150,8 @@ let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 let g:UltiSnipsEditSplit="vertical"
-let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips', '~/.vim/bundle/vim-snippets/UltiSnips']
+let g:UltiSnipsSnippetDirectories = [stdpath('data') . '/plugged' . '/vim-snippets/UltiSnips']
+
 
 " vim-rooter
 " for files not in a project, chroot to the directory containing the file
@@ -158,3 +166,8 @@ autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()
 autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()
 autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
 
+" Vimscript practice
+" make word upper case
+nnoremap <leader>U viwU
+" make word lower case
+nnoremap <leader>u viwu
