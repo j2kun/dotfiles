@@ -1,5 +1,5 @@
 " required to allow nvim to work with python3 inside a virtualenv
-let g:python3_host_prog="/home/j2kun/.config/nvim/venv/bin/python3"
+let g:python3_host_prog=$HOME."/.config/nvim/venv/bin/python3"
 
 call plug#begin(stdpath('data') . '/plugged')
 
