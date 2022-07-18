@@ -7,13 +7,10 @@ set completeopt=noinsert,menu,menuone,noselect
 " Lua modules loaded by require('FOO') are in lua/FOO.lua
 lua << EOF
 require('plugins')
+require('settings')
 require('treesitter')
 require('language_server')
 EOF
-
-
-" <leader> = ,
-let mapleader=","
 
 " faster esc
 inoremap jk <ESC>
@@ -22,29 +19,8 @@ inoremap jk <ESC>
 nnoremap <leader>ve :vsp $MYVIMRC<CR>
 nnoremap <leader>vs :source $MYVIMRC<CR>
 
-" Tabs = 2 spaces
-set tabstop=2           " number of visual spaces per TAB
-set shiftwidth=2        " number of visual spaces per shift
-set softtabstop=2       " number of spaces in tab when editing
-set expandtab           " tabs are spaces
-
 """ Misc UI config
 colorscheme NeoSolarized
-set background=dark
-set cursorline          " highlight current line
-set notermguicolors     " disable terminal GUI colors
-set nohlsearch          " don't highlight searches after done
-" use system clipboard
-set clipboard=unnamed
-
-""" Backup preferences
-set backup
-set backupdir=~/.cache/nvim/backup
-set backupskip=~/.cache/*
-set directory=~/.cache/nvim/swap
-set writebackup
-set undofile   " Maintain undo history between sessions
-set undodir=~/.cache/nvim/undo
 
 """ Session management
 let g:session_autosave = 'yes'
