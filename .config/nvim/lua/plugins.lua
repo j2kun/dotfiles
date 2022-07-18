@@ -6,11 +6,12 @@ Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'honza/vim-snippets'
-Plug 'knubie/vim-kitty-navigator'
 Plug 'lervag/vimtex'
 
--- gs to start function arg swap mode
-Plug 'machakann/vim-swap'
+-- Set up treesitter (see treesitter.lua)
+Plug('nvim-treesitter/nvim-treesitter', {['do']=':TSUpdate'})
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+
 Plug 'mechatroner/rainbow_csv'
 Plug 'overcache/NeoSolarized'
 Plug 'preservim/nerdtree'
@@ -43,7 +44,6 @@ Plug 'rafamadriz/friendly-snippets'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-treesitter/nvim-treesitter'
 -- Allows Telescope to use neovim builtins, like `vim.lsp.buf.code_action()`
 Plug 'nvim-telescope/telescope-ui-select.nvim'
 
