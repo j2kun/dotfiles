@@ -7,6 +7,7 @@ set completeopt=noinsert,menu,menuone,noselect
 " Lua modules loaded by require('FOO') are in lua/FOO.lua
 lua << EOF
 require('plugins')
+require('treesitter')
 require('language_server')
 EOF
 
