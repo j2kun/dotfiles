@@ -139,6 +139,38 @@ nvim_lsp.rls.setup {
   }
 }
 
+-- Only try to configure lua lsp if it is installed in the right location
+local sumneko_root_path = vim.fn.expand('~/.local/lua-language-server')
+if vim.fn.isdirectory(sumneko_root_path) == 0 then
+  local sumneko_binary_path = sumneko_root_path .. "/bin/lua-language-server"
+
+  require'lspconfig'.sumneko_lua.setup {
+    cmd = {sumneko_binary_path, "-E", sumneko_root_path .. "/main.lua"};
+    settings = {
+      Lua = {
+        runtime = {
+          -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+          version = 'LuaJIT',
+          -- Setup your lua path
+          path = vim.split(package.path, ';')
+        },
+        diagnostics = {
+          -- Get the language server to recognize the `vim` global
+          globals = {'vim'},
+        },
+        workspace = {
+          -- Make the server aware of Neovim runtime files
+          library = {[vim.fn.expand('$VIMRUNTIME/lua')] = true, [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true}
+        },
+        -- Do not send telemetry data containing a randomized but unique identifier
+        telemetry = {
+          enable = false,
+        },
+      },
+    },
+  }
+end
+
 -- Show diagnostics in the buffer
 vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
   virtual_text = true,
