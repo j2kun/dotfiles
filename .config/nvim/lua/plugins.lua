@@ -5,7 +5,6 @@ vim.call('plug#begin', vim.fn.stdpath("data") .. '/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'honza/vim-snippets'
 Plug 'lervag/vimtex'
 
 -- Set up treesitter (see treesitter.lua)
@@ -35,7 +34,7 @@ Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
-Plug 'rafamadriz/friendly-snippets'
+Plug 'hrsh7th/vim-vsnip-integ'
 
 -- vsnip snippets for lots of languages
 Plug 'rafamadriz/friendly-snippets'

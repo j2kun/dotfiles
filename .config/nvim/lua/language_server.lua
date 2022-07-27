@@ -16,6 +16,12 @@ cmp.setup({
   },
   window = {
   },
+  completion = {
+    autocomplete = {
+      cmp.TriggerEvent.TextChanged,
+      cmp.TriggerEvent.InsertEnter,
+    },
+  },
   mapping = {
     ['<C-j>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 's' }),
     ['<C-k>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 's' }),
@@ -27,6 +33,7 @@ cmp.setup({
     ['<C-e>'] = cmp.mapping.close(),
     ['<CR>'] = cmp.mapping.confirm({
       behavior = cmp.ConfirmBehavior.Replace,
+      select = false, -- Only confirm explicitly selected items.
     })
   },
   sources = cmp.config.sources({
@@ -75,7 +82,7 @@ local on_attach = function(client, bufnr)
   local opts = { noremap=true, silent=true }
 
   -- Enable completion triggered by <c-x><c-o>
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+  -- buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   -- set keymappings for interacting with the LSP.
   -- They use Telescope so that the results show up in a nice fuzzy-finder popup
@@ -113,6 +120,8 @@ nvim_lsp.pylsp.setup {
 nvim_lsp.texlab.setup {
   on_attach = on_attach,
   capabilities = capabilities,
+  -- For debugging
+  -- cmd = {os.getenv("HOME") .. "/texlab/target/release/texlab", "-vvvv", "--log-file=/tmp/texlab.log" },
   flags = {
     debounce_text_changes = 150,
   },

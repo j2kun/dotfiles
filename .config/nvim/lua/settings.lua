@@ -14,7 +14,7 @@ vim.opt.tabstop = 2        -- number of visual spaces per TAB
 vim.cmd("colorscheme NeoSolarized")
 vim.opt.background = "dark"
 vim.opt.clipboard = "unnamed"  -- use system clipboard
-vim.opt.completeopt = {"noinsert", "menu", "menuone", "noselect"}
+vim.opt.completeopt = {"menu", "menuone", "noselect", "noinsert"}
 vim.opt.cursorline = true      -- highlight current line
 vim.opt.hlsearch = false       -- don't highlight searches after done
 vim.opt.number = true          -- enable line numbers in the left margin

@@ -10,6 +10,7 @@ require('mappings')
 require('snippets')
 EOF
 
+" TODO: see :help api-autocmd
 " relative numbers for focus + normal mode, absolute for all others
 augroup numbertoggle
   autocmd!
