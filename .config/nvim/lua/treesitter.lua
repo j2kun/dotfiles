@@ -94,3 +94,8 @@ require('nvim-treesitter.configs').setup {
     },
   },
 } 
+
+
+-- Disable vimtex's syntax highlighting, so it can be handled by Treesitter.
+-- Cf. https://github.com/lervag/vimtex/commit/dfaca59bbbf0079ab1b4f159337ae7f17d1b5289
+vim.g.vimtex_syntax_enabled = 0
