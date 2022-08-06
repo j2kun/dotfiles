@@ -36,5 +36,8 @@ vim.g.session_autoload = 'yes'
 vim.g.session_default_to_last = 'yes'
 vim.opt.sessionoptions:remove { "buffers" }
 
+-- Spell checker defaults across all filetypes
+vim.opt.spelllang = 'en_us'
+
 -- Ensure latex uses ftplugin/tex.vim for all .tex files
 vim.g.tex_flavor = 'latex'
