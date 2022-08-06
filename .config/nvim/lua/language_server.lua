@@ -100,8 +100,8 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<leader>fd', '<cmd>Telescope diagnostics<cr>', opts)
 
   -- next diagnostics, like gitgutter ]c
-  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+  buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
 end
 
 nvim_lsp.pylsp.setup {
@@ -121,7 +121,7 @@ nvim_lsp.texlab.setup {
   on_attach = on_attach,
   capabilities = capabilities,
   -- For debugging
-  -- cmd = {os.getenv("HOME") .. "/texlab/target/release/texlab", "-vvvv", "--log-file=/tmp/texlab.log" },
+  cmd = {os.getenv("HOME") .. "/texlab/target/release/texlab", "-vvvv", "--log-file=/tmp/texlab.log" },
   flags = {
     debounce_text_changes = 150,
   },
