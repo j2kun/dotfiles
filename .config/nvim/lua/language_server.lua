@@ -107,12 +107,13 @@ end
 nvim_lsp.pylsp.setup {
   on_attach = on_attach,
   capabilities = capabilities,
-  cmd = {os.getenv("HOME") .. "/.config/nvim/venv/bin/pylsp", "-v", "--log-file=/tmp/pylsp.log" },
+  cmd = {os.getenv("HOME") .. "/.config/nvim/venv/bin/pylsp"}, -- , "-vvvv", "--log-file=/tmp/pylsp.log" },
   settings = {
     pylsp = {
       plugins = {
         autopep8 = {enabled = false},
-        yapf = {enabled = true},
+        yapf = {enabled = false},
+        black = {enabed = true},
       },
     },
   },
