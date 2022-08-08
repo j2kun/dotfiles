@@ -8,6 +8,7 @@ require('language_server')
 require('gitgutter')
 require('mappings')
 require('snippets')
+require('autocommands')
 EOF
 
 " TODO: see :help api-autocmd
