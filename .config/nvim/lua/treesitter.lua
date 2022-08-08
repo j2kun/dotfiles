@@ -40,7 +40,13 @@ require('nvim-treesitter.configs').setup {
   auto_install = true,
 
   highlight = { enable = true },
-  indent = { enable = true },
+  indent = {
+    enable = true,
+    disable = {
+      -- https://github.com/nvim-treesitter/nvim-treesitter/issues/1136
+      "python",
+    }, 
+  },
 
   incremental_selection = { 
     enable = true,

@@ -1,3 +1,5 @@
+let g:do_filetype_lua = 1
+let g:did_load_filetypes = 0
 
 " Lua modules loaded by require('FOO') are in lua/FOO.lua
 lua << EOF
