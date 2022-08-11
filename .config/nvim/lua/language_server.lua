@@ -150,7 +150,7 @@ nvim_lsp.rls.setup {
 
 -- Only try to configure lua lsp if it is installed in the right location
 local sumneko_root_path = vim.fn.expand('~/.local/lua-language-server')
-if vim.fn.isdirectory(sumneko_root_path) == 0 then
+if vim.fn.isdirectory(sumneko_root_path) == 1 then
   local sumneko_binary_path = sumneko_root_path .. "/bin/lua-language-server"
 
   require'lspconfig'.sumneko_lua.setup {
