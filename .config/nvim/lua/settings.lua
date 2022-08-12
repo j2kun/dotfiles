@@ -18,7 +18,6 @@ vim.opt.cursorline = true      -- highlight current line
 vim.opt.hlsearch = false       -- don't highlight searches after done
 vim.opt.number = true          -- enable line numbers in the left margin
 vim.opt.relativenumber = true  -- enable relative line numbers in the left margin
-vim.opt.termguicolors = true   -- enable terminal GUI colors, required for NeoSolarized
 
 --- Backup preferences
 vim.opt.backup = true
