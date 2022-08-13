@@ -6,7 +6,7 @@ export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
-ZSH_THEME="agnoster"
+ZSH_THEME="robbyrussell"
 DEFAULT_USER=$(whoami)
 
 # Uncomment the following line to use hyphen-insensitive completion. Case
