@@ -2,7 +2,7 @@
 # zmodload zsh/zprof
 
 export ZSH=$HOME/.oh-my-zsh
-ZSH_THEME="robbyrussell"
+ZSH_THEME=""
 
 # _ and - are interchangeable.
 HYPHEN_INSENSITIVE="true"
@@ -25,6 +25,17 @@ plugins=(fasd)
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/bin:$HOME/.local/bin:.:$PATH"
 source $ZSH/oh-my-zsh.sh
 
+# Use pure prompt https://github.com/sindresorhus/pure
+# Config lines below come after oh-my-zsh
+#
+# One-time install:
+#
+#   mkdir -p "$HOME/.zsh" && git clone https://github.com/sindresorhus/pure.git "$HOME/.zsh/pure"
+#
+fpath+=($HOME/.zsh/pure)
+autoload -U promptinit; promptinit
+prompt pure
+
 alias vim='nvim'
 alias ls='exa'
 export EDITOR='nvim'
@@ -46,3 +57,5 @@ fi
 
 # to print ZSH's startup profiling info, uncomment this line and the line at the top
 # zprof
+
+alias luamake=/usr/local/google/home/jkun/.config/lua-language-server/3rd/luamake/luamake
