@@ -36,20 +36,24 @@ fpath+=($HOME/.zsh/pure)
 autoload -U promptinit; promptinit
 prompt pure
 
+if ! command -v nvim &> /dev/null; then
+  export EDITOR="vim"
+else
+  export EDITOR="nvim"
+fi
+
+export LS_COLORS="di=34:ln=35"
+
 alias vim='nvim'
 alias ls='exa'
-export EDITOR='nvim'
-
 alias gti='git'
+alias latexmk='latexmk -pvc -pdf -xelatex -interaction=nonstopmode'
+# git aliases
+alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 
 eval "$(fasd --init auto)"
 alias j='fasd_cd -d'
 alias v='f -e vim' # quick opening files with vim
-
-alias latexmk='latexmk -pvc -pdf -xelatex -interaction=nonstopmode'
-
-# git aliases
-alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 
 if [ -f "$HOME/.zshrc.local" ]; then
    source .zshrc.local
@@ -57,5 +61,3 @@ fi
 
 # to print ZSH's startup profiling info, uncomment this line and the line at the top
 # zprof
-
-alias luamake=/usr/local/google/home/jkun/.config/lua-language-server/3rd/luamake/luamake
