@@ -50,6 +50,7 @@ alias gti='git'
 alias latexmk='latexmk -pvc -pdf -xelatex -interaction=nonstopmode'
 # git aliases
 alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias gr="cd $(git rev-parse --show-toplevel)"
 
 eval "$(fasd --init auto)"
 alias j='fasd_cd -d'
