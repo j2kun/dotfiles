@@ -13,7 +13,6 @@
     user = j2kun
 
 [init]
-    templateDir = ~/.config/git/template/
     defaultBranch = main
 
 [push]
@@ -24,14 +23,13 @@
 
 [alias]
     change-commits = "!f() { VAR=$1; OLD=$2; NEW=$3; shift 3; git filter-branch --env-filter \"if [[ \\\"$`echo $VAR`\\\" = '$OLD' ]]; then export $VAR='$NEW'; fi\" $@; }; f "
-    fresh = !git checkout main && git pull
+    fresh = !git switch main && git pull
     go = "!sh -c \"vim $(git grep --name-only $1 | head -n 1)\" -"
     it = !git init && git commit -m "root" --allow-empty
-    l = !git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit | head -n 6
+    l = !git log --graph -n 6 --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit | cat
     please = push --force-with-lease
     recent = for-each-ref --sort=-committerdate refs/heads/
-    remain= !git checkout main && git pull && git checkout - && git rebase main
-    rmm = !git checkout main && git pull && git checkout - && GIT_SEQUENCE_EDITOR=/usr/local/bin/git-rebase-drop-migrations.sh git rebase -i main && python manage.py makemigrations
+    remain = !git checkout main && git pull && git checkout - && git rebase main
     s = status --short --branch
     exec = "!exec "
 
