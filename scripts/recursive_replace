@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# example arg:
+# 's/subdomainA\.example\.com/subdomainB.example.com/g' 
+find . -type f -print0 | xargs -0 sed -i "$1"

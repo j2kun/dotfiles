@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [[ "$PWD" = */lib/* ]]
+then
+  echo $(pwd | sed 's|/lib/|/include/|')
+else
+  if [[ "$PWD" = */include/* ]]
+  then
+    echo $(pwd | sed 's|/include/|/lib/|')
+  else
+    echo $(pwd)
+  fi
+fi
