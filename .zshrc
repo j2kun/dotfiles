@@ -57,7 +57,7 @@ alias j='fasd_cd -d'
 alias v='f -e vim' # quick opening files with vim
 
 if [ -f "$HOME/.zshrc.local" ]; then
-   source .zshrc.local
+   source "$HOME/.zshrc.local"
 fi
 
 # to print ZSH's startup profiling info, uncomment this line and the line at the top
