@@ -44,6 +44,11 @@ fi
 
 export LS_COLORS="di=34:ln=35"
 
+# needs the file scrips/jump_lib_include on the path
+function jli() {
+  cd $(jump_lib_include)
+}
+
 alias vim='nvim'
 alias ls='exa'
 alias gti='git'
