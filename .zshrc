@@ -59,7 +59,7 @@ alias gr='cd $(git rev-parse --show-toplevel)'
 
 eval "$(fasd --init auto)"
 alias j='fasd_cd -d'
-alias v='f -e vim' # quick opening files with vim
+alias v='f -e nvim' # quick opening files with vim
 
 if [ -f "$HOME/.zshrc.local" ]; then
    source "$HOME/.zshrc.local"
