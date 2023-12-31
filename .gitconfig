@@ -8,7 +8,8 @@
 
 [core]
     editor = vim
-	pager = diff-so-fancy | less --tabs=4 -RF
+    # to bypass: git --no-pager diff
+    pager = diff-so-fancy | less --tabs=4 -RF
 
 [github]
     user = j2kun
@@ -40,25 +41,22 @@
     process = git-lfs filter-process
     required = true
 
-# [credential]
-#     helper = osxkeychain
-#     helper = /mnt/c/Program\\ Files/Git/mingw64/libexec/git-core/git-credential-manager-core.exe
 [rerere]
-	enabled = true
+    enabled = true
 [interactive]
-	diffFilter = diff-so-fancy --patch
+    diffFilter = diff-so-fancy --patch
 [color "diff-highlight"]
-	oldNormal = red bold
-	oldHighlight = red bold 52
-	newNormal = green bold
-	newHighlight = green bold 22
+    oldNormal = red bold
+    oldHighlight = red bold 52
+    newNormal = green bold
+    newHighlight = green bold 22
 [color "diff"]
-	meta = 11
-	frag = magenta bold
-	func = 146 bold
-	commit = yellow bold
-	old = red bold
-	new = green bold
-	whitespace = red reverse
+    meta = 11
+    frag = magenta bold
+    func = 146 bold
+    commit = yellow bold
+    old = red bold
+    new = green bold
+    whitespace = red reverse
 [color]
-	ui = true
+    ui = true
