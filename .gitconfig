@@ -8,8 +8,8 @@
 
 [core]
     editor = vim
-    # to bypass: git --no-pager diff
-    pager = diff-so-fancy | less --tabs=4 -RF
+    # cargo install git-delta
+    pager = delta
 
 [github]
     user = j2kun
@@ -17,11 +17,63 @@
 [init]
     defaultBranch = main
 
+[branch]
+    # sort branches in `git branch` by most recently used
+    sort = -committerdate
+
 [push]
-    default = simple
+    # automatically creates a remote branch with the same name as the local
+    # branch
+    default = current
 
 [pull]
     rebase = true
+
+[merge]
+    conflictstyle = zdiff3
+
+[commit]
+    # puts the diff in the commit editor so you can see it while writing the
+    # commit message
+    verbose = true
+
+[help]
+    autocorrect = prompt
+
+[rebase]
+    # git commit --fixup <old-commit> to create a fixup commit
+    # autosquash ensures it is automatically squashed into the old commit
+    # when rebasing
+    autosquash = true
+
+[rerere]
+    enabled = true
+
+[color]
+    ui = true
+
+[interactive]
+    diffFilter = delta --color-only
+
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+
+# cargo install git-delta
+[delta]
+    navigate = true    # use n and N to move between diff sections
+    light = false
+    side-by-side = true
+
+[diff]
+    colorMoved = default
+    algorithm = histogram
+
+# always use ssh remotes when pushing, even if https is cloned
+[url "git@github.com:"]
+	pushInsteadOf = "https://github.com/"
 
 [alias]
     change-commits = "!f() { VAR=$1; OLD=$2; NEW=$3; shift 3; git filter-branch --env-filter \"if [[ \\\"$`echo $VAR`\\\" = '$OLD' ]]; then export $VAR='$NEW'; fi\" $@; }; f "
@@ -35,28 +87,3 @@
     s = status --short --branch
     exec = "!exec "
 
-[filter "lfs"]
-    clean = git-lfs clean -- %f
-    smudge = git-lfs smudge -- %f
-    process = git-lfs filter-process
-    required = true
-
-[rerere]
-    enabled = true
-[interactive]
-    diffFilter = diff-so-fancy --patch
-[color "diff-highlight"]
-    oldNormal = red bold
-    oldHighlight = red bold 52
-    newNormal = green bold
-    newHighlight = green bold 22
-[color "diff"]
-    meta = 11
-    frag = magenta bold
-    func = 146 bold
-    commit = yellow bold
-    old = red bold
-    new = green bold
-    whitespace = red reverse
-[color]
-    ui = true
