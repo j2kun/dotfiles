@@ -73,7 +73,7 @@
 
 # always use ssh remotes when pushing, even if https is cloned
 [url "git@github.com:"]
-	pushInsteadOf = "https://github.com/"
+    pushInsteadOf = "https://github.com/"
 
 [alias]
     change-commits = "!f() { VAR=$1; OLD=$2; NEW=$3; shift 3; git filter-branch --env-filter \"if [[ \\\"$`echo $VAR`\\\" = '$OLD' ]]; then export $VAR='$NEW'; fi\" $@; }; f "
@@ -86,4 +86,9 @@
     remain = !git checkout main && git pull && git checkout - && git rebase main
     s = status --short --branch
     exec = "!exec "
-
+    # Squash all commits onto the target revision and combine the commit messages into one
+    # Usage: git squash main && git commit --amend (to optionally reword the message)
+    squash = "!f(){ CUR=`git rev-parse HEAD` && git reset --soft ${1} && git commit -m \"$(git log --format=%B ${1}..${CUR})\"; };f"
+    # Squash all commits onto the target revision and use the earliest commit message
+    # Usage: git squash-quiet main
+    squash-quiet = "!f(){ CUR=`git rev-parse HEAD` && FIRST=$(git rev-list ${1}..HEAD | tail -n 1) && git reset --soft ${1} && git commit -m \"$(git log --format=%B -n 1 ${FIRST})\"; };f"
