@@ -1,0 +1,2 @@
+# always print line numbers, also this is useful for `qf` integration
+-n
