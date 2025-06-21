@@ -36,12 +36,6 @@ fpath+=($HOME/.zsh/pure)
 autoload -U promptinit; promptinit
 prompt pure
 
-if ! command -v nvim &> /dev/null; then
-  export EDITOR="vim"
-else
-  export EDITOR="nvim"
-fi
-
 export LS_COLORS="di=34:ln=35"
 
 # needs the file scrips/jump_lib_include on the path
@@ -50,9 +44,9 @@ function jli() {
 }
 
 alias vim='nvim'
-alias ls='exa'
+alias ls='eza'
 alias gti='git'
-alias latexmk='latexmk -pvc -pdf -xelatex -interaction=nonstopmode'
+alias latexmk='latexmk -pvc -pdf -xelatex -shell-escape -interaction=nonstopmode'
 # git aliases
 alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias gr='cd $(git rev-parse --show-toplevel)'
@@ -64,6 +58,16 @@ alias v='f -e nvim' # quick opening files with vim
 if [ -f "$HOME/.zshrc.local" ]; then
    source "$HOME/.zshrc.local"
 fi
+
+if ! command -v nvim &> /dev/null; then
+  export EDITOR="vim"
+else
+  export EDITOR="nvim"
+fi
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # to print ZSH's startup profiling info, uncomment this line and the line at the top
 # zprof
