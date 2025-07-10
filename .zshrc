@@ -20,7 +20,6 @@ zstyle ':omz:update' mode disabled
 # Plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(fasd)
 
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/bin:$HOME/.local/bin:.:$PATH"
 source $ZSH/oh-my-zsh.sh
@@ -51,10 +50,6 @@ alias latexmk='latexmk -pvc -pdf -xelatex -shell-escape -interaction=nonstopmode
 alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias gr='cd $(git rev-parse --show-toplevel)'
 
-eval "$(fasd --init auto)"
-alias j='fasd_cd -d'
-alias v='f -e nvim' # quick opening files with vim
-
 if [ -f "$HOME/.zshrc.local" ]; then
    source "$HOME/.zshrc.local"
 fi
@@ -68,6 +63,8 @@ fi
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 
 # to print ZSH's startup profiling info, uncomment this line and the line at the top
 # zprof
